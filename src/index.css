@@ -1,0 +1,134 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Space+Grotesk:wght@300..700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0c0b08;
+  --color-coal: #15120d;
+  --color-coal-2: #1d1912;
+  --color-cream: #efe8da;
+  --color-sand: #a2977f;
+  --color-gold: #c8a45c;
+  --color-gold-soft: #e7ce93;
+  --color-line: #2b251a;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Space Grotesk", system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  @apply bg-ink text-cream font-sans antialiased;
+  font-optical-sizing: auto;
+}
+
+::selection {
+  background: #c8a45c;
+  color: #0c0b08;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0c0b08;
+}
+::-webkit-scrollbar-thumb {
+  background: #2b251a;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #c8a45c;
+}
+
+html.custom-cursor,
+html.custom-cursor * {
+  cursor: none !important;
+}
+
+/* ---------- typographic helpers ---------- */
+.text-outline {
+  -webkit-text-stroke: 1px rgba(239, 232, 218, 0.22);
+  color: transparent;
+}
+.text-outline-gold {
+  -webkit-text-stroke: 1px rgba(200, 164, 92, 0.45);
+  color: transparent;
+}
+.gold-text {
+  background: linear-gradient(105deg, #e7ce93 0%, #c8a45c 45%, #9a7a35 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.glass {
+  background: rgba(21, 18, 13, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* ---------- motion utilities ---------- */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes marquee-rev {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+@keyframes spin-slower {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.marquee-track {
+  animation: marquee 36s linear infinite;
+}
+.marquee-track-slow {
+  animation: marquee 80s linear infinite;
+}
+.marquee-track-rev {
+  animation: marquee-rev 80s linear infinite;
+}
+.marquee-pause:hover .marquee-track,
+.marquee-pause:hover .marquee-track-slow,
+.marquee-pause:hover .marquee-track-rev {
+  animation-play-state: paused;
+}
+.animate-floaty {
+  animation: floaty 6s ease-in-out infinite;
+}
+.animate-spin-slower {
+  animation: spin-slower 18s linear infinite;
+}
+
+/* ---------- film grain ---------- */
+.noise::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
